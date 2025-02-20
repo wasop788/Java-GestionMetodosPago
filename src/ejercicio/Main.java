@@ -6,9 +6,7 @@ public class Main {
 	
 	private static Scanner numeros = new Scanner(System.in);
 	private static Scanner letras = new Scanner(System.in);
-	private static TarjetaCredito[] tarjetas = new TarjetaCredito[10];
-	private static PayPal[] paypal = new PayPal[10];
-	private static Bizum[] bizum = new Bizum[10];
+	private static MetodoPago[] pagos = new MetodoPago[10];
 
 	public static void main(String[] args) {
 		int opcion;
@@ -30,15 +28,9 @@ public class Main {
 	}
 	
 	public static void generarValores() {
-		tarjetas[0] = new TarjetaCredito(10000, "Snoopy", 3456789);
-		tarjetas[1] = new TarjetaCredito(2000, "Olaf", 8456321);
-		tarjetas[2] = new TarjetaCredito(1500, "Belle", 2474589);
-		paypal[0] = new PayPal(1500, "Pig Pen", "pigpen@gmail.com");
-		paypal[1] = new PayPal(10000, "Carlitos", "charliebrown@gmail.com");
-		paypal[2] = new PayPal(2000, "Sally", "sallybrown@gmail.com");
-		bizum[0] = new Bizum(2000, "Eduardo", 123456789);
-		bizum[1] = new Bizum(1500, "Lucy", 321654987);
-		bizum[2] = new Bizum(10000, "Linus", 987654321);
+		pagos[0] = new TarjetaCredito(10000, "Snoopy", 3456789);
+		pagos[1] = new PayPal(10000, "Carlitos", "charliebrown@gmail.com");
+		pagos[2] = new Bizum(2000, "Eduardo", 123456789);
 		
 	}
 	
@@ -137,10 +129,10 @@ public class Main {
 		cantidad = numeros.nextDouble();
 		System.out.println("Y el numero de tarjeta:");
 		numeroTarjeta = numeros.nextInt();
-		for (int i = 0; i < tarjetas.length; i++) {
-			if (tarjetas[i] == null) {
-				tarjetas[i] = new TarjetaCredito(cantidad, nombre, numeroTarjeta);
-				i = tarjetas.length;
+		for (int i = 0; i < pagos.length; i++) {
+			if (pagos[i] == null) {
+				pagos[i] = new TarjetaCredito(cantidad, nombre, numeroTarjeta);
+				i = pagos.length;
 				comprobar = true;
 			}
 			
@@ -161,10 +153,10 @@ public class Main {
 		cantidad = numeros.nextDouble();
 		System.out.println("Y el email asociado a la cuenta:");
 		email = letras.next();
-		for (int i = 0; i < paypal.length; i++) {
-			if (paypal[i] == null) {
-				paypal[i] = new PayPal(cantidad, nombre, email);
-				i = paypal.length;
+		for (int i = 0; i < pagos.length; i++) {
+			if (pagos[i] == null) {
+				pagos[i] = new PayPal(cantidad, nombre, email);
+				i = pagos.length;
 				comprobar = true;
 			}
 			
@@ -186,10 +178,10 @@ public class Main {
 		cantidad = numeros.nextDouble();
 		System.out.println("Y el numero de telefono asociado a esa cuenta:");
 		numeroTelefono = numeros.nextInt();
-		for (int i = 0; i < bizum.length; i++) {
-			if (bizum[i] == null) {
-				bizum[i] = new Bizum(cantidad, nombre, numeroTelefono);
-				i = bizum.length;
+		for (int i = 0; i < pagos.length; i++) {
+			if (pagos[i] == null) {
+				pagos[i] = new Bizum(cantidad, nombre, numeroTelefono);
+				i = pagos.length;
 				comprobar = true;
 			}
 			
@@ -248,8 +240,8 @@ public class Main {
 	public static boolean eliminarTarjeta(int numeroPago) {
 		boolean comprobar = false;
 		
-		if (tarjetas[numeroPago - 1] != null) {
-			tarjetas[numeroPago - 1] = null;
+		if (pagos[numeroPago - 1] != null) {
+			pagos[numeroPago - 1] = null;
 			comprobar = true;
 		} 
 		
@@ -260,8 +252,8 @@ public class Main {
 	public static boolean eliminarPaypal(int numeroPago) {
 		boolean comprobar = false;
 		
-		if (paypal[numeroPago - 1] != null) {
-			paypal[numeroPago - 1] = null;
+		if (pagos[numeroPago - 1] != null) {
+			pagos[numeroPago - 1] = null;
 			comprobar = true;
 		}
 		
@@ -272,8 +264,8 @@ public class Main {
 	public static boolean eliminarBizum(int numeroPago) {
 		boolean comprobar = false;
 		
-		if (bizum[numeroPago - 1] != null) {
-			bizum[numeroPago - 1] = null;
+		if (pagos[numeroPago - 1] != null) {
+			pagos[numeroPago - 1] = null;
 			comprobar = true;
 		} 
 		
@@ -283,23 +275,9 @@ public class Main {
 
 	public static void consultarPagos() {
 		System.out.println("\n🦧 Pagos asociados a su cuenta: 🦧");
-		for (int i = 0; i < tarjetas.length; i++) {
-			if (tarjetas[i] != null) {
-				System.out.println(tarjetas[i]);
-			}
-			
-		}
-		
-		for (int i = 0; i < paypal.length; i++) {
-			if (paypal[i] != null) {
-				System.out.println(paypal[i]);
-			}
-			
-		}
-		
-		for (int i = 0; i < bizum.length; i++) {
-			if (bizum[i] != null) {
-				System.out.println(bizum[i]);
+		for (int i = 0; i < pagos.length; i++) {
+			if (pagos[i] != null) {
+				System.out.println(pagos[i]);
 			}
 			
 		}
@@ -334,9 +312,12 @@ public class Main {
 	
 	public static void filtrarTarjeta() {
 		System.out.println("\nTarjetas de credito registradas:");
-		for (int i = 0; i < tarjetas.length; i++) {
-			if (tarjetas[i] != null) {
-				System.out.println(tarjetas[i]);
+		for (int i = 0; i < pagos.length; i++) {
+			if (pagos[i] != null) {
+				if (pagos[i] instanceof TarjetaCredito) {
+					System.out.println(pagos[i]);
+				}
+				
 			}
 			
 		}
@@ -345,9 +326,12 @@ public class Main {
 	
 	public static void filtrarPaypal() {
 		System.out.println("\nCuentas de PayPal registradas:");
-		for (int i = 0; i < paypal.length; i++) {
-			if (paypal[i] != null) {
-				System.out.println(paypal[i]);
+		for (int i = 0; i < pagos.length; i++) {
+			if (pagos[i] != null) {
+				if (pagos[i] instanceof PayPal) {
+					System.out.println(pagos[i]);
+				}
+				
 			}
 			
 		}
@@ -356,9 +340,12 @@ public class Main {
 
 	public static void filtrarBizum() {
 		System.out.println("\nCuentas de Bizum registradas:");
-		for (int i = 0; i < bizum.length; i++) {
-			if (bizum[i] != null) {
-				System.out.println(bizum[i]);
+		for (int i = 0; i < pagos.length; i++) {
+			if (pagos[i] != null) {
+				if (pagos[i] instanceof Bizum) {
+					System.out.println(pagos[i]);
+				}
+				
 			}
 			
 		}
@@ -366,99 +353,29 @@ public class Main {
 	}
 
 	public static void pagar() {
-		int opcion, numeroPago;
+		int numeroPago;
 		double cantidad;
 		
-		System.out.println("\n🦧 Por favor indique el tipo de pago a usar: 🦧");
-		opcion = numeros.nextInt();
-		System.out.println("Introduzca la cantidad a pagar:");
+		System.out.println("\n🦧 Por favor introduzca la cantidad que desea pagar: 🦧");
 		cantidad = numeros.nextDouble();
 		System.out.println("Y el numero de pago que desea usar:");
 		numeroPago = numeros.nextInt();
 		if (numeroPago >= 1 && numeroPago <= 10) {
-			tratarPagar(opcion, numeroPago, cantidad);
+			if (pagos[numeroPago - 1] != null) {
+				if (pagos[numeroPago - 1].procesarPago(cantidad)) {
+					System.out.println("La cantidad se ha pagado correctamente");
+				} else {
+					System.out.println("Error, no dispone de suficiente saldo para pagar la cantidad deseada");
+					pagos[numeroPago - 1].cancelarPago();
+				}
+				
+			} else {
+				System.out.println("Error, ese numero de pago no existe");
+			}
+			
 		} else {
 			error();
 		}
-		
-	}
-	
-	public static void tratarPagar(int opcion, int numeroPago, double cantidad) {
-		switch (opcion) {
-		case 1:
-			if (pagarTarjeta(numeroPago, cantidad)) {
-				System.out.println("\nSe ha pagado la cantidad indicada");
-			} else {
-				System.out.println("Error, ese numero de pago no existe");
-			}
-			break;
-		case 2:
-			if (pagarPaypal(numeroPago, cantidad)) {
-				System.out.println("\nSe ha pagado la cantidad indicada");
-			} else {
-				System.out.println("Error, ese numero de pago no existe");
-			}
-			break;
-		case 3:
-			if (pagarBizum(numeroPago, cantidad)) {
-				System.out.println("\nSe ha pagado la cantidad indicada");
-			} else {
-				System.out.println("Error, ese numero de pago no existe");
-			}
-			break;
-		default:
-			error();
-		}
-		
-	}
-	
-	public static boolean pagarTarjeta(int numeroPago, double cantidad) {
-		boolean comprobar = false;
-		
-		if (tarjetas[numeroPago - 1] != null) {
-			if (tarjetas[numeroPago - 1].procesarPago(cantidad)) {
-				comprobar = true;
-			} else {
-				System.out.println("\nError, no dispone de saldo suficiente");
-				tarjetas[numeroPago - 1].cancelarPago();
-			}
-		}
-		
-		return comprobar;
-		
-	}
-	
-	public static boolean pagarPaypal(int numeroPago, double cantidad) {
-		boolean comprobar = false;
-		
-		if (paypal[numeroPago - 1] != null) {
-			if (paypal[numeroPago - 1].procesarPago(cantidad)) {
-				comprobar = true;
-			} else {
-				System.out.println("\nError, no dispone de saldo suficiente");
-				paypal[numeroPago - 1].cancelarPago();
-			}
-			
-		}
-		
-		return comprobar;
-		
-	}
-	
-	public static boolean pagarBizum(int numeroPago, double cantidad) {
-		boolean comprobar = false;
-		
-		if (bizum[numeroPago - 1] != null) {
-			if (bizum[numeroPago - 1].procesarPago(cantidad)) {
-				comprobar = true;
-			} else {
-				System.out.println("\nError, no dispone de saldo suficiente");
-				bizum[numeroPago - 1].cancelarPago();
-			}
-			
-		}
-		
-		return comprobar;
 		
 	}
 	

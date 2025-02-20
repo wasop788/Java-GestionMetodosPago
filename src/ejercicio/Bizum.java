@@ -1,6 +1,6 @@
 package ejercicio;
 
-public class Bizum extends MetodoPago implements Pago {
+public class Bizum extends MetodoPago {
 	private int numeroTelefono;
 	
 	public Bizum() {
@@ -24,15 +24,4 @@ public class Bizum extends MetodoPago implements Pago {
 		return "Bizum [numeroTelefono=" + numeroTelefono + ", cantidadDinero=" + cantidadDinero + ", titular=" + titular + "]";
 	}
 
-	public boolean procesarPago(double cantidad) {
-		boolean comprobar = false;
-		
-		if (cantidadDinero > cantidad) {
-			cantidadDinero -= cantidad;
-			comprobar = true;
-		}
-		
-		return comprobar;
-	}
-	
 }

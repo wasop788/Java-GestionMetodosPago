@@ -1,6 +1,6 @@
 package ejercicio;
 
-public abstract class MetodoPago {
+public abstract class MetodoPago implements Pago {
 	protected double cantidadDinero;
 	protected String titular;
 
@@ -31,6 +31,17 @@ public abstract class MetodoPago {
 	@Override
 	public String toString() {
 		return "MetodoPago [cantidadDinero=" + cantidadDinero + ", titular=" + titular + "]";
+	}
+	
+	public boolean procesarPago(double cantidad) {
+		boolean comprobar = false;
+		
+		if (cantidadDinero > cantidad) {
+			cantidadDinero -= cantidad;
+			comprobar = true;
+		}
+		
+		return comprobar;
 	}
 	
 }

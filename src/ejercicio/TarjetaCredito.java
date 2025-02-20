@@ -1,6 +1,6 @@
 package ejercicio;
 
-public class TarjetaCredito extends MetodoPago implements Pago {
+public class TarjetaCredito extends MetodoPago {
 	private int NumeroTarjeta;
 	
 	public TarjetaCredito() {
@@ -22,17 +22,6 @@ public class TarjetaCredito extends MetodoPago implements Pago {
 	@Override
 	public String toString() {
 		return "TarjetaCredito [NumeroTarjeta=" + NumeroTarjeta + ", cantidadDinero=" + cantidadDinero + ", titular=" + titular + "]";
-	}
-	
-	public boolean procesarPago(double cantidad) {
-		boolean comprobar = false;
-		
-		if (cantidadDinero > cantidad) {
-			cantidadDinero -= cantidad;
-			comprobar = true;
-		}
-		
-		return comprobar;
 	}
 	
 }
